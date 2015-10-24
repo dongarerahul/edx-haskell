@@ -33,6 +33,12 @@ zip' (a:as) (b: bs) = (a, b) : (zip' as bs)
 palindrome :: Ord a => [a] -> Bool
 palindrome a = reverse a == a
 
---f :: x -> x
---twice :: f -> x
---twice f x = f (f x)
+-- using named Lamba
+twice :: Num x => x -> x
+twice x = f (f x)
+  where f x = x * 2
+
+-- Using anonymous Lamba expressions
+twice' :: Num x=>[x]->[x]
+twice' n = map (\ x -> x * 2) n
+
