@@ -34,3 +34,17 @@ positions x xs = [i | (i, n) <- zip [1..n] xs, n == x]
   where n = length xs
 
 --lowers xs = length [x | x <- xs, isLower x]
+pyths n = [(x, y, z) | x <- [1..n], y <- [1..n], z <- [1..n], x ^ 2 + y ^ 2 == z ^ 2]
+
+-- no is perfect if sum of its factor = number itself
+perfects n = [x | x <- [1..n], isPerfect x]
+  where isPerfect a = sum (init(factors a)) == a
+
+divides :: Int -> Int -> Bool
+divides n a = n `mod` a == 0
+
+divisors :: Int -> [Int]
+divisors n = [x | x <- [1..n], divides n x]
+
+riffle a b = Main.concat [[x, y] | (x, y) <- zip a b]
+
