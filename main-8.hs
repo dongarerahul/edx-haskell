@@ -5,7 +5,7 @@ displayAge maybeAge =
        Nothing -> putStrLn "You provided Invalid year"
        Just age -> putStrLn $ "In 2020, you will be : " ++ show age
 
-calcAge futureYear birthYear = futureYear - birthYear
+calcAge birthYear futureYear = futureYear - birthYear
 
 main = do
   putStrLn "Enter your birthyear: "
@@ -14,10 +14,15 @@ main = do
   putStrLn "Enter some year in future: "
   futureYearString <- getLine
 
+-- use partial function with functor map i.e. fmap
+-- i.e. without use monad power (Maybe)
+-- We are not using <- operator associated with IO monad
+--
+-- birthYear is kept as partial function
+
   let maybeAge = do
-        birthYear <- readMay birthYearString
-        futureYear <- readMay futureYearString
-        return $ calcAge futureYear birthYear
+        birthYear <- fmap calcAge $ readMay birthYearString
+        fmap birthYear $ readMay futureYearString
 
   displayAge maybeAge
 
